@@ -21,7 +21,16 @@ namespace ConsoleApp1
         }
         public void Lance(Random r)
         {
-
+            lettre = lettres[r.Next(0, 5)];
+        }
+        public string toString()
+        {
+            string s = "";
+            for(int i = 0; i < lettres.Length; i++)
+            {
+                s += lettres[i].ToString();
+            }
+            return s;
         }
     }
 }
