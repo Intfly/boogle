@@ -25,11 +25,22 @@ namespace ConsoleApp1
         }
         public void Add_Mot(string mot)
         {
-            this.motsTrouves = new int[motsTrouves.Length + 1];
+            string[] mots = new string[motsTrouves.Length + 1];
             for(int i = 0; i < this.motsTrouves.Length; i++)
             {
-
+                mots[i] = motsTrouves[i];
             }
+            mots[motsTrouves.Length] = mot;
+            motsTrouves = mots;
+        }
+        public string toString()
+        {
+            string s = "Nom : " + nom + "\nScore : " + score + "\nMots trouvés : ";
+            for( int i = 0;i <motsTrouves.Length;i++)
+            {
+                s += "\n" + motsTrouves[i];
+            }
+            return s;
         }
     }
 }
