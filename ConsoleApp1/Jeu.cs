@@ -10,11 +10,12 @@ namespace ConsoleApp1
     {
         string langue;
 
-        public void definirLangueJeu()
+        public string definirLangueJeu()
         {
-
+            //permet de définir la langue du jeu
+            //renvoi la langue du jeu
             string langueTemp = "";
-            while(langueTemp != "français" || langueTemp != "anglais")
+            while(langueTemp != "français" && langueTemp != "anglais")
             {
                 Console.WriteLine("veuillez choisir la langue du jeu (anglais ou français)");
                 langueTemp = Console.ReadLine();
@@ -23,11 +24,12 @@ namespace ConsoleApp1
             {
                 case "français":
                     this.langue = "FR";
-                    break;
+                    break;  
                 case "anglais":
                     this.langue = "EN";
                     break;
             }
+            return this.langue;
         }
     }
 }

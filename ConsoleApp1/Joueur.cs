@@ -11,6 +11,12 @@ namespace ConsoleApp1
         string nom;
         int score;
         string[] motsTrouves;
+
+        public Joueur(string nom)
+        {
+            this.nom = nom;
+        }
+
         public bool Contain(string mot)
         {
             bool b = false;

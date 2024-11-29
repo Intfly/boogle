@@ -8,10 +8,16 @@ class Program
     static void Main()
     {
         Jeu jeu = new Jeu();
-        jeu.definirLangueJeu();
+        string langue = jeu.definirLangueJeu();
+
+        Dictionnaire dictionnaire = new Dictionnaire(langue);
+        dictionnaire.trierDictionnaire();
+
+
         
         Plateau plateau = new Plateau();
         plateau.definirTaillePlateau();
+
 
 
     }
