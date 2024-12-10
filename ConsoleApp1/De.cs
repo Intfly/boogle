@@ -19,17 +19,20 @@ namespace ConsoleApp1
             }
             this.lettre = lettre;
         }
+        public char[] Lettres { get { return lettres; } set { lettres = value; } }
+        public char Lettre {  get { return lettre; } set { lettre = value; } }
         public void Lance(Random r)
         {
             lettre = lettres[r.Next(0, 5)];
         }
         public string toString()
         {
-            string s = "";
+            string s = "Dé : \n";
             for(int i = 0; i < lettres.Length; i++)
             {
-                s += lettres[i].ToString();
+                s += lettres[i].ToString() + " ; ";
             }
+            s += "\nLettre lancée : " + lettre;
             return s;
         }
     }
