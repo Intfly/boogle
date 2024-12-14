@@ -12,9 +12,18 @@ namespace ConsoleApp1
         public string[] strings;
         public string language;
 
-        public Dictionnaire(string file)
+        public Dictionnaire(string language)
         {
-            this.file = file;
+            this.language = language;
+            string file = "";
+            if(language == "français")
+            {
+                file = "..\\net6.0\\MotsPossiblesFR.txt";
+            }
+            else if(language == "english")
+            {
+                file = "..\\net6.0\\MotsPossiblesEN.txt";
+            }
             List<string> strings = new List<string>();
             string[] strings2;
             try
@@ -24,7 +33,7 @@ namespace ConsoleApp1
                 string mot = "";
                 for(int i = 0; i < ligne.Length; i++)
                 {
-                    if (ligne[i] == ' ')
+                    if (ligne[i] == ' ' && mot.Length != 0)
                     {
                         strings.Add(mot);
                         mot = "";
@@ -38,14 +47,7 @@ namespace ConsoleApp1
             catch (Exception ex) 
             {
                 Console.WriteLine(ex);
-            }
-            if(file == "..\\net6.0\\MotsPossiblesEN")
-            {
-                this.language = "English";
-            }
-            else if(file == "..\\net6.0\\MotsPossiblesFR")
-            {
-                this.language = "Français";
+                Console.WriteLine("Le fichier n'est pas lisible.");
             }
             strings2 = new string[strings.Count];
             for(int i = 0; i < strings.Count; i++)
@@ -63,6 +65,11 @@ namespace ConsoleApp1
             {
                 lettres.Add(alphabet[i], 0);
             }
+            IDictionary<char, int> lettres2 = new Dictionary<char, int>();
+            foreach(char c in lettres.Keys)
+            {
+                lettres2.Add(c, lettres[c]);
+            }
             int nbLength = 0;
             int length = 0;
             for(int i = 0; i < this.strings.Length; i++)
@@ -75,12 +82,16 @@ namespace ConsoleApp1
                 {
                     lengths.Add(strings[i].Length, 1);
                 }
-                for(int j = 0; j <alphabet.Length; j++)
+                foreach(char j in lettres.Keys)
                 {
-                    if (strings[i][0] == lettres[alphabet[j]])
+                    if (strings[i].Length != 0 && strings[i][0] == j)
                     {
-                        lettres[alphabet[j]]++;
+                        lettres2[j]++;
                     }
+                }
+                foreach(char j in lettres.Keys)
+                {
+                    lettres[j] = lettres2[j];
                 }
             }
             string tostring = "Nombre de mots par longueur :";
@@ -95,5 +106,6 @@ namespace ConsoleApp1
             tostring += "\nLangue : " + this.language;
             return tostring;
         }
+        
     }
 }
