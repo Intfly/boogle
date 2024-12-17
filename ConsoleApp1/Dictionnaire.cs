@@ -20,7 +20,7 @@ namespace ConsoleApp1
             {
                 file = "..\\net6.0\\MotsPossiblesFR.txt";
             }
-            else if (language == "english")
+            else if (language == "anglais")
             {
                 file = "..\\net6.0\\MotsPossiblesEN.txt";
             }

@@ -19,6 +19,7 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("veuillez choisir la langue du jeu (anglais ou français)");
                 langueTemp = Console.ReadLine();
+                langueTemp = langueTemp.ToLower();
             }
             switch (langueTemp)
             {

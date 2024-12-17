@@ -55,7 +55,6 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(ex.ToString());
             }
-
         }
         
         public void Lance()
