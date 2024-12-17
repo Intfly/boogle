@@ -8,62 +8,92 @@ namespace ConsoleApp1
 {
     internal class Dictionnaire
     {
-        string langue;
-        string[] mots;
 
-        public Dictionnaire(string langue)
+
+        public string file;
+        public string[] mots;
+        public string language;
+
+        public Dictionnaire(string file)
         {
-            this.langue = langue;
-
-            //permet d'obtenir le path du fichier de mots de la langue choisie depuis le profil de debug
-            string path_mots = "../../../../fichiersAnnexe/MotsPossibles" + langue + ".txt";
-
-            using (StreamReader listeMotsRaw = new StreamReader(path_mots))
+            this.file = file;
+            List<string> strings = new List<string>();
+            string[] strings2;
+            try
             {
-                string listeMotsString = listeMotsRaw.ReadLine();
-                //On créé une array de mots à partir de la string de mots séparés par un espace
-                this.mots = listeMotsString.Split(" ");
-            }
-        }
-
-
-        public void afficherDictionnaire()
-        {
-            foreach(string mot in this.mots)
-            {
-                Console.WriteLine(mot);
-            }
-        }
-        public void trierDictionnaire()
-        {
-            //tri par sélection pour ordonner dans l'ordre alphabétique les mots du dicitonnaire
-            for (int i = 0; i < this.mots.Length - 1; i++)
-            {
-                int min = i;
-
-                for (int j = i + 1; j < this.mots.Length; j++)
+                StreamReader sr = new StreamReader(file);
+                string ligne = sr.ReadToEnd();
+                string mot = "";
+                for(int i = 0; i < ligne.Length; i++)
                 {
-                    int indice_lettre = 0;
-                    while (indice_lettre < this.mots[j].Length && indice_lettre < this.mots[min].Length)
+                    if (ligne[i] == ' ')
                     {
-                        if (this.mots[j][indice_lettre] < this.mots[min][indice_lettre])
-                        {
-                            min = j;
-                            break;
-                        }
-                        if(this.mots[j][indice_lettre] > this.mots[min][indice_lettre])
-                        {
-                            break;
-                        }
-                        indice_lettre++;
+                        strings.Add(mot);
+                        mot = "";
                     }
-                    
+                    else
+                    {
+                        mot += ligne[i];
+                    }
                 }
-
-                string temp = this.mots[min];
-                this.mots [min] = this.mots[i];
-                this.mots[i] = temp;
             }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex);
+            }
+            if(file == "..\\net6.0\\MotsPossiblesEN")
+            {
+                this.language = "English";
+            }
+            else if(file == "..\\net6.0\\MotsPossiblesFR")
+            {
+                this.language = "Français";
+            }
+            strings2 = new string[strings.Count];
+            for(int i = 0; i < strings.Count; i++)
+            {
+                strings2[i] = strings[i];
+            }
+            this.mots = strings2;
+        }
+        public string toString()
+        {
+            IDictionary<int, int> lengths = new Dictionary<int, int>();
+            IDictionary<char, int> lettres = new Dictionary<char, int>();
+            char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            for(int i = 0; i < alphabet.Length; i++)
+            {
+                lettres.Add(alphabet[i], 0);
+            }
+            for(int i = 0; i < this.mots.Length; i++)
+            {
+                if (lengths.ContainsKey(mots[i].Length))
+                {
+                    lengths[mots[i].Length]++;
+                }
+                else
+                {
+                    lengths.Add(mots[i].Length, 1);
+                }
+                for(int j = 0; j <alphabet.Length; j++)
+                {
+                    if (mots[i][0] == lettres[alphabet[j]])
+                    {
+                        lettres[alphabet[j]]++;
+                    }
+                }
+            }
+            string tostring = "Nombre de mots par longueur :";
+            foreach(int key in lengths.Keys)
+            {
+                tostring += "\n" + lengths[key] + " mots de longeur " + key + ".";
+            }
+            foreach(char key in lettres.Keys)
+            {
+                tostring += "\n" + lettres[key] + " mots commençant par " + key + ".";
+            }
+            tostring += "\nLangue : " + this.language;
+            return tostring;
         }
     }
 }
