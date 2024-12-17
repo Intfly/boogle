@@ -10,13 +10,13 @@ namespace ConsoleApp1
     {
         char[] lettres;
         char lettre;
-
+        Random r;
 
         public De()
         {
             lettres = new char[6];
             Random r = new Random();
-            Lance(r);
+            Lance();
             try
             {
                 StreamReader sr = new StreamReader("..\\net6.0\\Lettres.txt");
@@ -56,9 +56,10 @@ namespace ConsoleApp1
         }
         public char[] Lettres { get { return lettres; } set { lettres = value; } }
         public char Lettre {  get { return lettre; } set { lettre = value; } }
-        public void Lance(Random r)
+        public void Lance()
         {
-            lettre = lettres[r.Next(0, 5)];
+            
+            lettre = lettres[this.r.Next(0, 5)];
         }
         public string toString()
         {

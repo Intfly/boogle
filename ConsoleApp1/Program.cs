@@ -14,7 +14,7 @@ class Program
         Plateau plateau = new Plateau();
         plateau.definirTaillePlateau();
 
-        Dictionnaire dico = new Dictionnaire("..\\net6.O\\MotsPossiblesFR.txt");
+        Dictionnaire dico = new Dictionnaire("français");
         Console.WriteLine(dico.toString);
 
 

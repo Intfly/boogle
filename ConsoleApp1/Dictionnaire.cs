@@ -54,7 +54,7 @@ namespace ConsoleApp1
             {
                 strings2[i] = strings[i];
             }
-            this.strings = strings2;
+            this.mots = strings2;
         }
         public string toString()
         {
@@ -82,7 +82,7 @@ namespace ConsoleApp1
                 }
                 foreach(char j in lettres.Keys)
                 {
-                    if (strings[i].Length != 0 && strings[i][0] == j)
+                    if (mots[i].Length != 0 && strings[i][0] == j)
                     {
                         lettres2[j]++;
                     }
@@ -104,6 +104,21 @@ namespace ConsoleApp1
             tostring += "\nLangue : " + this.language;
             return tostring;
         }
-        
+        public string[] triDictionnaire()
+        {
+
+        }
+        public bool RechDichoRecursif(string mot, int mil)
+        {
+            int mil = mots.Length / 2;
+            if (mots[mil] == mot)
+            {
+                return mil;
+            }
+            else if (mots[mil] > mot)
+            {
+                return RechDichoRecursif(m)
+            }
+        }
     }
 }
