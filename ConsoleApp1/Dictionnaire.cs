@@ -9,7 +9,7 @@ namespace ConsoleApp1
     internal class Dictionnaire
     {
         public string file;
-        public string[] strings;
+        public string[] mots;
         public string language;
 
         public Dictionnaire(string language)
@@ -70,13 +70,11 @@ namespace ConsoleApp1
             {
                 lettres2.Add(c, lettres[c]);
             }
-            int nbLength = 0;
-            int length = 0;
-            for(int i = 0; i < this.strings.Length; i++)
+            for(int i = 0; i < this.mots.Length; i++)
             {
                 if (lengths.ContainsKey(strings[i].Length))
                 {
-                    lengths[strings[i].Length]++;
+                    lengths[mots[i].Length]++;
                 }
                 else
                 {

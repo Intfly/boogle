@@ -23,10 +23,15 @@ namespace ConsoleApp1
                 string line = "";
                 line = sr.ReadToEnd();
                 string[] lignes = line.Split('\n');
+                string[][] lignesSeparees = new string[lignes.Length][];
+                for(int  i = 0; i < lignes.Length; i++)
+                {
+                    lignesSeparees[i] = lignes[i].Split("; ");
+                }
                 int alphLength = 0;
                 for(int i = 0; i < lignes.Length; i++)
                 {
-                    alphLength += Convert.ToInt32(lignes[i][1]);
+                    alphLength += Convert.ToInt32(lignesSeparees[i][1]);
                 }
                 char[] alphPondere = new char[alphLength];
                 int k = 0;
