@@ -11,55 +11,56 @@ namespace ConsoleApp1
         char[] lettres;
         char lettre;
         Random r;
-
+        public char[] Lettres { get { return lettres; } set { lettres = value; } }
+        public char Lettre { get { return lettre; } set { lettre = value; } }
         public De()
         {
             lettres = new char[6];
-            Random r = new Random();
-            Lance();
+            this.r = new Random();
+            
+            
             try
             {
                 StreamReader sr = new StreamReader("..\\net6.0\\Lettres.txt");
-                string line = "";
-                line = sr.ReadToEnd();
-                string[] lignes = line.Split('\n');
+                string text = "";
+                text = sr.ReadToEnd();
+                string[] lignes = text.Split('\n');
                 string[][] lignesSeparees = new string[lignes.Length][];
                 for(int  i = 0; i < lignes.Length; i++)
                 {
-                    lignesSeparees[i] = lignes[i].Split("; ");
+                    lignesSeparees[i] = lignes[i].Split(";");
                 }
                 int alphLength = 0;
-                for(int i = 0; i < lignes.Length; i++)
+                for(int i = 0; i < lignesSeparees.GetLength(0); i++)
                 {
-                    alphLength += Convert.ToInt32(lignesSeparees[i][1]);
+                    alphLength += Convert.ToInt32(lignesSeparees[i][2]);
                 }
                 char[] alphPondere = new char[alphLength];
                 int k = 0;
-                for(int i = 0; i < lignes.Length; i++)
+                for(int i = 0; i < lignesSeparees.GetLength(0); i++)
                 {
-                    for(int j = 0;j < Convert.ToInt32(lignes[i][1]); j++)
+                    for(int j = 0;j < Convert.ToInt32(lignesSeparees[i][2]); j++)
                     {
-                        alphPondere[k] = lignes[i][0];
+                        alphPondere[k] = lignesSeparees[i][0][0];
                         k++;
                     }
                 }
-
                 for(int i = 0; i < lettres.Length; i++)
                 {
-                    lettres[i] = lignes[r.Next(lignes.Length)][0];
+                    lettres[i] = alphPondere[r.Next(alphPondere.Length)];
                 }
+                Lance();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+
         }
-        public char[] Lettres { get { return lettres; } set { lettres = value; } }
-        public char Lettre {  get { return lettre; } set { lettre = value; } }
+        
         public void Lance()
         {
-            
-            lettre = lettres[this.r.Next(0, 5)];
+            lettre = lettres[r.Next(0, 5)];
         }
         public string toString()
         {
