@@ -13,9 +13,12 @@ class Program
         
         Plateau plateau = new Plateau();
         plateau.definirTaillePlateau();
+        plateau.definirDesPlateau();
+        plateau.toString();
 
-        Dictionnaire dico = new Dictionnaire("français");
-        Console.WriteLine(dico.toString);
+        
+        //Dictionnaire dico = new Dictionnaire("français");
+        //Console.WriteLine(dico.toString);
 
 
     }
