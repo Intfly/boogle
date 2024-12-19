@@ -8,11 +8,9 @@ class Program
     static void Main()
     {
         Jeu jeu = new Jeu();
-        string langue = jeu.definirLangueJeu();
+        jeu.lancer();
 
         
-        Plateau plateau = new Plateau();
-        Console.WriteLine(plateau.toString());
 
         
         //Dictionnaire dico = new Dictionnaire("français");

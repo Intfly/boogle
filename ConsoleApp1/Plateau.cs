@@ -78,7 +78,7 @@ namespace ConsoleApp1
         {
             string plateau = "";
 
-            for (int i = 0; i < 2*this.taille +1; i++)
+            for (int i = 0; i < 4*this.taille +1; i++)
             {
                 plateau += "-";
             }
@@ -89,11 +89,11 @@ namespace ConsoleApp1
                 for (int j = 0; j < this.taille; j++)
                 {
 
-                    plateau += this.des[i, j].Lettre;
+                    plateau += " "+this.des[i, j].Lettre+" ";
                     plateau +=  "|" ;
                 }
                 plateau += "\n";
-                for (int j = 0; j < 2*this.taille+1; j++)
+                for (int j = 0; j < 4*this.taille+1; j++)
                 {
                     plateau += "-";
                 }
@@ -112,8 +112,10 @@ namespace ConsoleApp1
             {
 
                 if (mot.Length < 2) return false;
+                mot = mot.ToUpper();
 
                 desUtilises = new bool[this.taille, this.taille];
+                coordonnees = new int[2];
                 for(int i=0; i < this.taille; i++)
                 {
                     for(int j=0; j < this.taille; j++)
@@ -122,7 +124,7 @@ namespace ConsoleApp1
                     }
                 }
 
-                for (int i = 0; i < this.taille; i++)//on trouve la position de la première lettre
+                for (int i = 0; i < this.taille; i++)///on trouve la position de la première lettre
                 {
                     for (int j = 0; j < this.taille; j++)
                     {
@@ -145,11 +147,11 @@ namespace ConsoleApp1
             }
             else
             {
-                //on trouve les coordonnées des lettres
-                //on évite les erreurs de dépassement avec les Min et Max
-                for (int i = Math.Max(0,coordonnees[0]-1); i < Math.Min(this.taille, coordonnees[0]+1); i++)
+                ///on trouve les coordonnées des lettres
+                ///on évite les erreurs de dépassement avec les Min et Max
+                for (int i = Math.Max(0,coordonnees[0]-1); i <= Math.Min(this.taille-1, coordonnees[0]+1); i++)
                 {
-                    for (int j = Math.Max(0, coordonnees[1] - 1); j < Math.Min(this.taille, coordonnees[1] + 1); j++)
+                    for (int j = Math.Max(0, coordonnees[1] - 1); j <= Math.Min(this.taille-1, coordonnees[1] + 1); j++)
                     {
                         if (this.des[i, j].Lettre == mot[indice])
                         {
