@@ -33,6 +33,8 @@ bld/
 [Ll]ogs/
 
 !ConsoleApp1/bin/Debug/net6.0/Lettres.txt
+!ConsoleApp1/bin/Debug/net6.0/MotsPossiblesEN.txt
+!ConsoleApp1/bin/Debug/net6.0/MotsPossiblesFR.txt
 
 
 # Visual Studio 2015/2017 cache/options directory
