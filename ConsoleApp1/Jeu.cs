@@ -12,6 +12,8 @@ namespace ConsoleApp1
 
         public string definirLangueJeu()
         {
+            this.langue = "FR";
+            return "FR";
             //permet de définir la langue du jeu
             //renvoi la langue du jeu
             string langueTemp = "";
