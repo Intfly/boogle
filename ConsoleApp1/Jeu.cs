@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace ConsoleApp1
     {
         string langue;
         Joueur[] joueurs;
+        Plateau plateau;
+        Dictionnaire dictionnaire;
 
         public void lancer()
         {
@@ -18,14 +21,20 @@ namespace ConsoleApp1
             string[] nomJoueurs = this.nommerJoueurs();
             creerJoueurs(nomJoueurs);
 
-            Plateau plateau = new Plateau();
+            this.plateau = new Plateau();
+            this.dictionnaire = new Dictionnaire(this.langue);
+
+            bool fini = false;
+            while(fini == false)
+            {
+                fini = this.tourSuivant();
+            }
+
 
         }
 
         public string definirLangueJeu()
         {
-            this.langue = "FR";
-            return "FR";
             ///permet de définir la langue du jeu
             ///renvoi la langue du jeu
             string langueTemp = "";
@@ -35,31 +44,31 @@ namespace ConsoleApp1
                 langueTemp = Console.ReadLine();
                 langueTemp = langueTemp.ToLower();
             }
-            switch (langueTemp)
-            {
-                case "français":
-                    this.langue = "FR";
-                    break;  
-                case "anglais":
-                    this.langue = "EN";
-                    break;
-            }
+            this.langue = langueTemp;
             return this.langue;
         }
 
         public string[] nommerJoueurs()
         {
             int nombreJoueurs = 0;
-            while(nombreJoueurs < 1)
+            while(nombreJoueurs < 2)
             {
                 Console.WriteLine("Combien de joueurs participeront au jeu ?");
                 nombreJoueurs = Convert.ToInt32(Console.ReadLine());
             }
 
             string[] nomJoueurs = new string[nombreJoueurs];
-            for(int i=0; i<nombreJoueurs; i++)
+            string nomTemp = "";
+            for(int i=0; i<nombreJoueurs; i++)///on fait en sorte que l'utilisateur ne puisse pas ne pas avoir de nom
             {
-                nomJoueurs[i] = Console.ReadLine();
+                
+                while(nomTemp == "" || nomTemp == " ")
+                {
+                    Console.WriteLine("Nom du joueur " + (i + 1)+":");
+                    nomTemp = Console.ReadLine();
+                }
+                nomJoueurs[i] = nomTemp;
+                nomTemp = "";
             }
             return nomJoueurs;
         }
@@ -70,6 +79,57 @@ namespace ConsoleApp1
             {
                 this.joueurs[i] = new Joueur(nomJoueurs[i]);
             }
+        }
+
+        public int calculScore(string mot)
+        {
+            return 0;
+        }
+
+        public bool tourSuivant()
+        {
+
+            string motTemp ="";
+            int scoreTemp;
+            for(int i=0; i<this.joueurs.Length; i++)/// on fait un passage de boucle par joueur
+            {
+                ///on randomize le plateau et on l'affiche
+                this.plateau.lancerDesPlateau();
+                Console.WriteLine(this.plateau.toString());
+
+                ///le joueur trouve ensuite des mots
+                int compteur = 0;
+                List<string> motsTrouves = new List<string> { };
+                Console.WriteLine("Au tour de: " + this.joueurs[i].Nom+"!");
+                Console.WriteLine("Quels mots avez-vous trouvés ? (si vous n'en trouvez plus, appuyez sur entrée)");
+                while (true)
+                {
+                    Console.Write("Mot "+(compteur+1)+" : ");
+                    motTemp = Console.ReadLine();
+                    if (motTemp == "" || plateau.Test_Plateau(motTemp, this.dictionnaire)== false) break;
+                    motsTrouves.Add(motTemp);
+                    compteur++;
+                    
+                }
+                ///prise en compte des mots trouvés cette manche et calcul du score 
+                scoreTemp = 0;
+                Console.Write("\nMots trouvés ("+motsTrouves.Count+"): ");
+                foreach(string mot in motsTrouves)
+                {
+                    Console.Write(mot + " ");
+                    scoreTemp += calculScore(mot)+mot.Length;
+                    this.joueurs[i].Add_Mot(mot); 
+                }
+                this.joueurs[i].Score += scoreTemp;
+
+                ///Récapitulatif
+                Console.WriteLine("\nScore gagné cette manche: "+scoreTemp);
+                Console.WriteLine("Le joueur " + this.joueurs[i].Nom + " a un score total de " + this.joueurs[i].Score + " points");
+                Console.WriteLine("\n");
+
+            }
+
+            return false ;
         }
     }
 }

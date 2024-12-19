@@ -147,8 +147,9 @@ namespace ConsoleApp1
 
             return result;
         }
-        public bool RechDichoRecursif(string mot, string[] dico)
+        public bool RechDichoRecursif(string mot, string[] dico = null)
         {
+            if (dico == null) dico = this.mots;
             int mil = dico.Length / 2;
             if (dico.Length == 0)
             {

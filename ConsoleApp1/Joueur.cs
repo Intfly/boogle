@@ -11,10 +11,17 @@ namespace ConsoleApp1
         string nom;
         int score;
         string[] motsTrouves;
+        public string Nom { get { return nom; } }
+        public int Score { get { return score; } set { score = value; } }
+        public string[] MotsTrouves { get { return motsTrouves; } set { motsTrouves = value; } }
+
 
         public Joueur(string nom)
         {
             this.nom = nom;
+            this.score = 0;
+            this.motsTrouves = new string[0];
+
         }
 
         public bool Contain(string mot)
@@ -22,7 +29,7 @@ namespace ConsoleApp1
             bool b = false;
             for(int i = 0;i < this.motsTrouves.Length;i++)
             {
-                if(mot == motsTrouves[i])
+                if(mot == this.motsTrouves[i])
                 {
                     b = true;
                 }
@@ -31,20 +38,20 @@ namespace ConsoleApp1
         }
         public void Add_Mot(string mot)
         {
-            string[] mots = new string[motsTrouves.Length + 1];
+            string[] mots = new string[this.motsTrouves.Length + 1];
             for(int i = 0; i < this.motsTrouves.Length; i++)
             {
-                mots[i] = motsTrouves[i];
+                mots[i] = this.motsTrouves[i];
             }
-            mots[motsTrouves.Length] = mot;
-            motsTrouves = mots;
+            mots[this.motsTrouves.Length] = mot;
+            this.motsTrouves = mots;
         }
         public string toString()
         {
-            string s = "Nom : " + nom + "\nScore : " + score + "\nMots trouvés : ";
-            for( int i = 0;i <motsTrouves.Length;i++)
+            string s = "Nom : " + this.nom + "\nScore : " + this.score + "\nMots trouvés : ";
+            for( int i = 0;i <this.motsTrouves.Length;i++)
             {
-                s += "\n" + motsTrouves[i];
+                s += "\n" + this.motsTrouves[i];
             }
             return s;
         }

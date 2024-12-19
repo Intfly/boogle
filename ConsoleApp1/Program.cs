@@ -10,13 +10,6 @@ class Program
         Jeu jeu = new Jeu();
         jeu.lancer();
 
-        
-
-        
-        //Dictionnaire dico = new Dictionnaire("français");
-        //Console.WriteLine(dico.toString);
-
-
     }
 }
 

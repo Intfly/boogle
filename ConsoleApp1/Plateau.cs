@@ -104,7 +104,7 @@ namespace ConsoleApp1
         }
 
 
-        public bool Test_Plateau(string mot, int indice = 0, bool[,] desUtilises = null, int[] coordonnees = null)
+        public bool Test_Plateau(string mot, Dictionnaire dico, int indice = 0, bool[,] desUtilises = null, int[] coordonnees = null)
         {
 
             bool mot_trouve = false;
@@ -133,7 +133,7 @@ namespace ConsoleApp1
                             coordonnees[0] = i;
                             coordonnees[1] = j;
                             desUtilises[i,j] = true;
-                            mot_trouve |=  Test_Plateau(mot, indice + 1, desUtilises, coordonnees);
+                            mot_trouve |=  Test_Plateau(mot, dico, indice + 1, desUtilises, coordonnees);
                         }
                     }
                 }
@@ -141,7 +141,7 @@ namespace ConsoleApp1
             }
 
 
-            if (indice == mot.Length && true)// && mot appartient au dictionnaire
+            if (indice == mot.Length && dico.RechDichoRecursif(mot))// && mot appartient au dictionnaire
             {
                 return true;
             }
@@ -158,7 +158,7 @@ namespace ConsoleApp1
                             coordonnees[0] = i;
                             coordonnees[1] = j;
                             desUtilises[i, j] = true;
-                            mot_trouve |=  Test_Plateau(mot, indice + 1, desUtilises, coordonnees);
+                            mot_trouve |=  Test_Plateau(mot, dico, indice + 1, desUtilises, coordonnees);
                         }
                     }
                 }
