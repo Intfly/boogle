@@ -55,5 +55,18 @@ namespace ConsoleApp1
             }
             return s;
         }
+
+        public bool testAddMot(Dictionnaire dictionnaire, int nombreTest)
+        {
+            Random r = new Random();
+            for(int i=0; i<nombreTest; i++)
+            {
+                this.Add_Mot(dictionnaire.mots[r.Next(dictionnaire.mots.Length - 1)]);
+            }
+
+            if (this.motsTrouves.Length == nombreTest) return true;
+            return false;
+
+        }
     }
 }

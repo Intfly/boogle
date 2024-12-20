@@ -262,10 +262,7 @@ namespace ConsoleApp1
             for(int i=1; i < this.mots.Length; i++)
             {
                 ///on vérifie si les mots sont bien ordonnés
-                for(int y=0; y < Math.Max(this.mots[i].Length, this.mots[i-1].Length); y++)
-                {
-
-                }
+                if (this.mots[i - 1].CompareTo(this.mots[i])>0) return false;
             }
 
             return true;

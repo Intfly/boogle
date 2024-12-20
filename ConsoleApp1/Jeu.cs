@@ -39,9 +39,16 @@ namespace ConsoleApp1
             string param = "";
             int nombreTest = 0;
             bool retour = false;
-            Dictionnaire dictionnaire = new Dictionnaire(param);
+            Dictionnaire dictionnaire;
+            Joueur joueur;
+            Plateau plateau;
 
-            string[] tests = { "appartenance du mot dans le dictionnaire (RechDichoRecursif())", "tri du dictionnaire(triDictionnaire())" };
+            string[] tests = { 
+                "appartenance du mot dans le dictionnaire (RechDichoRecursif())",
+                "tri du dictionnaire(triDictionnaire())",
+                "ajout de mots aux mots trouvés du joueur (Add_Mot())",
+                "mot apprait dans le tableau (Test_Plateau())"
+            };
             Console.WriteLine("Quel test unitaire voulez-vous lancer ?");
 
             for(int i=0;i< tests.Length; i++)
@@ -57,14 +64,27 @@ namespace ConsoleApp1
                     param = Console.ReadLine();
                     Console.WriteLine("Combien de tests automatisés voulez-vous faire ?");
                     nombreTest = Convert.ToInt32(Console.ReadLine());
-
+                    dictionnaire = new Dictionnaire(param);
                     retour = dictionnaire.testRecherche(nombreTest);
                     break;
 
                 case 2:
                     Console.WriteLine("Quelle langue voulez-vous tester ?");
                     param = Console.ReadLine();
+                    dictionnaire = new Dictionnaire(param);
                     retour = dictionnaire.testTri();
+                    break;
+                case 3:
+                    Console.WriteLine("Quelle langue voulez-vous tester ?");
+                    param = Console.ReadLine();
+                    Console.WriteLine("Combien de tests automatisés voulez-vous faire ?");
+                    nombreTest = Convert.ToInt32(Console.ReadLine());
+                    joueur = new Joueur("test");
+                    retour = joueur.testAddMot(new Dictionnaire(param), nombreTest);
+                    break;
+                case 4:
+                    plateau = new Plateau();
+                    retour = plateau.testTestPlateau();
                     break;
             }
 
@@ -95,7 +115,9 @@ namespace ConsoleApp1
 
         public string[] nommerJoueurs()
         {
+            ///renvoi le nom des joueurs dans une liste de string
             int nombreJoueurs = 0;
+            ///on vérifie que le nombre de joueur est valide
             while(nombreJoueurs < 2)
             {
                 Console.WriteLine("Combien de joueurs participeront au jeu ?");
@@ -120,6 +142,7 @@ namespace ConsoleApp1
         public void creerJoueurs(string[] nomJoueurs)
         {
             this.joueurs = new Joueur[nomJoueurs.Length];
+            ///on assigne de façon itérative les noms pris à des nouvelles instances de la classe Joueur
             for(int i=0;i<nomJoueurs.Length;i++)
             {
                 this.joueurs[i] = new Joueur(nomJoueurs[i]);
