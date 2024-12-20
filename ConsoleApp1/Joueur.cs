@@ -33,13 +33,17 @@ namespace ConsoleApp1
         }
         public void Add_Mot(string mot)
         {
-            string[] mots = new string[motsTrouves.Length + 1];
-            for(int i = 0; i < this.motsTrouves.Length; i++)
+            if (!Contain(mot))
             {
-                mots[i] = motsTrouves[i];
+                string[] mots = new string[motsTrouves.Length + 1];
+                for (int i = 0; i < this.motsTrouves.Length; i++)
+                {
+                    mots[i] = motsTrouves[i];
+                }
+                mots[motsTrouves.Length] = mot;
+                motsTrouves = mots;
             }
-            mots[motsTrouves.Length] = mot;
-            motsTrouves = mots;
+            
         }
         public string toString()
         {
