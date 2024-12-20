@@ -62,10 +62,9 @@ namespace ConsoleApp1
                     break;
 
                 case 2:
-
-                    Console.WriteLine("Combien de tests automatisés voulez-vous faire ?");
-                    nombreTest = Convert.ToInt32(Console.ReadLine());
-                    retour = dictionnaire.testTri(nombreTest);
+                    Console.WriteLine("Quelle langue voulez-vous tester ?");
+                    param = Console.ReadLine();
+                    retour = dictionnaire.testTri();
                     break;
             }
 

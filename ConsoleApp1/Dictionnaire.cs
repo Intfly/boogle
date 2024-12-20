@@ -217,7 +217,7 @@ namespace ConsoleApp1
                 tamis(dico, 0, i);
             }
         }
-        public bool RechDichoRecursif(string mot, string[] dico)
+        public bool RechDichoRecursif(string mot, string[] dico =null)
         {
             if (dico == null) dico = this.mots;
             int mil = dico.Length / 2;
