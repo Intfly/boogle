@@ -108,7 +108,7 @@ namespace ConsoleApp1
                     lettres[j] = lettres2[j];
                 }
             }
-            ///Pour l'affichage, on fait 
+            ///Pour l'affichage, on parcourt lengths puis lettres pour afficher chaque
             string tostring = "Nombre de mots par longueur :";
             foreach (int key in lengths.Keys)
             {
@@ -129,10 +129,11 @@ namespace ConsoleApp1
             }
             else
             {
+                ///Tri de chaque moitié de dictionnaire
                 int mid = dico.Length / 2;
                 string[] mots1 = triDictionnaire(dico[0..mid]);
                 string[] mots2 = triDictionnaire(dico[mid..]);
-
+                ///Fusion des deux tris
                 return fusion(mots1, mots2);
             }
         }
@@ -140,7 +141,8 @@ namespace ConsoleApp1
         {
             int i = 0, j = 0, k = 0;
             string[] result = new string[mots1.Length + mots2.Length];
-
+            ///Parcours des deux tableaux : si mots[i] est plus petit que mots2[j] alors le résultat à l'indice k est mots1[i], et on incrémente k et i.
+            ///Sinon, la même chose avec mots2[j].
             while (i < mots1.Length && j < mots2.Length)
             {
                 if (mots1[i].CompareTo(mots2[j]) <= 0)
@@ -152,7 +154,7 @@ namespace ConsoleApp1
                     result[k++] = mots2[j++];
                 }
             }
-
+            ///Un des indices aura atteint son maximum avant l'autre, donc la fin sera composée des tableaux non terminés
             while (i < mots1.Length)
             {
                 result[k++] = mots1[i++];
@@ -166,11 +168,14 @@ namespace ConsoleApp1
         }
         public static int partition(string[] dico, int g, int d, int pivot)
         {
+            ///Pour la partition des tableaux, on stocke la valeur de dico[pivot], puis on l'échange avec dico[d]
+            ///On stocke également la valeur de gauche g.
             string pivotValue = dico[pivot]; 
             string temp = dico[pivot];
             dico[pivot] = dico[d];
             dico[d] = temp;
             int storeIndex = g;
+            
             for (int i = g; i < d; i++)
             {
                 if (dico[i].CompareTo(pivotValue) < 0) 
