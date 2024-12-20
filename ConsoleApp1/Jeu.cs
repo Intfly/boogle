@@ -128,7 +128,7 @@ namespace ConsoleApp1
 
         public int calculScore(string mot)
         {
-            return 0;
+            return mot.Length;
         }
 
         public bool tourSuivant()
@@ -162,7 +162,7 @@ namespace ConsoleApp1
                 foreach(string mot in motsTrouves)
                 {
                     Console.Write(mot + " ");
-                    scoreTemp += calculScore(mot)+mot.Length;
+                    scoreTemp += calculScore(mot);
                     this.joueurs[i].Add_Mot(mot); 
                 }
                 this.joueurs[i].Score += scoreTemp;
