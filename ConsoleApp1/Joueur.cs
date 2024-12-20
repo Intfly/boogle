@@ -15,6 +15,8 @@ namespace ConsoleApp1
         public Joueur(string nom)
         {
             this.nom = nom;
+            this.score = 0;
+            this.motsTrouves = new string[0];
         }
 
         public bool Contain(string mot)

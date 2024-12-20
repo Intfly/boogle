@@ -54,7 +54,8 @@ namespace ConsoleApp1
             {
                 strings2[i] = strings[i];
             }
-            mots = triDictionnaire(strings2);
+            mots = (strings2);
+            triParTas(strings2, mots.Length);
         }
         public string toString()
         {
@@ -146,6 +147,75 @@ namespace ConsoleApp1
             }
 
             return result;
+        }
+        public static int partition(string[] dico, int g, int d, int pivot)
+        {
+            string pivotValue = dico[pivot]; 
+            string temp = dico[pivot];
+            dico[pivot] = dico[d];
+            dico[d] = temp;
+            int storeIndex = g;
+            for (int i = g; i < d; i++)
+            {
+                if (dico[i].CompareTo(pivotValue) < 0) 
+                {
+                    temp = dico[i];
+                    dico[i] = dico[storeIndex];
+                    dico[storeIndex] = temp;
+                    storeIndex++;
+                }
+            }
+            temp = dico[storeIndex];
+            dico[storeIndex] = dico[d];
+            dico[d] = temp;
+
+            return storeIndex;
+        }
+        public static void triRapide(string[] dico, int g, int d)
+        {
+            if (g < d)
+            {
+                int pivot = g + (d - g) / 2;
+                pivot = partition(dico, g, d, pivot);
+                triRapide(dico, g, pivot - 1);
+                triRapide(dico, pivot + 1, d);
+            }
+        }
+        public static void tamis(string[] dico, int noeud, int n)
+        {
+            int k = noeud;
+            int max = k;
+            int gauche = 2 * k + 1;
+            int droite = 2 * k + 2;
+            if(gauche < n && dico[gauche].CompareTo(dico[max]) > 0)
+            {
+                max = gauche;
+            }
+            if(droite < n && dico[droite].CompareTo(dico[max]) > 0)
+            {
+                max = droite;
+            }
+            if(max != k)
+            {
+                string temp = dico[k];
+                dico[k] = dico[max];
+                dico[max] = temp;
+                tamis(dico, max, n);
+            }
+        }
+        public static void triParTas(string[] dico, int longueur)
+        {
+            for(int i = longueur / 2 - 1; i >= 0; i--)
+            {
+                tamis(dico, i, longueur);
+            }
+            for(int i = longueur - 1; i >=1; i--)
+            {
+                string temp = dico[i];
+                dico[i] = dico[0];
+                dico[0] = temp;
+                tamis(dico, 0, i);
+            }
         }
         public bool RechDichoRecursif(string mot, string[] dico)
         {
