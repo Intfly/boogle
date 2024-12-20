@@ -151,7 +151,33 @@ namespace ConsoleApp1
 
         public int calculScore(string mot)
         {
-            return mot.Length;
+            int score = 0;
+            try
+            {
+                StreamReader sr = new StreamReader("..\\net6.0\\Lettres.txt");
+                string text = sr.ReadToEnd();
+                string[] lignes = text.Split('\n');
+                string[][] lignesSeparees = new string[lignes.Length][];
+                for (int i = 0; i < lignes.Length; i++)
+                {
+                    lignesSeparees[i] = lignes[i].Split(";");
+                }
+                for(int i = 0; i < mot.Length; i++)
+                {
+                    for(int j = 0;j < lignes.Length; j++)
+                    {
+                        if (lignesSeparees[j][0][0] == mot[i])
+                        {
+                            score += Convert.ToInt32(lignesSeparees[j][1]);
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.ToString());
+            }
+            return score + mot.Length;
         }
 
         public bool tourSuivant()
