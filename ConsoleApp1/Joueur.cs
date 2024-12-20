@@ -11,12 +11,17 @@ namespace ConsoleApp1
         string nom;
         int score;
         string[] motsTrouves;
+        public string Nom { get { return nom; } }
+        public int Score { get { return score; } set { score = value; } }
+        public string[] MotsTrouves { get { return motsTrouves; } set { motsTrouves = value; } }
+
 
         public Joueur(string nom)
         {
             this.nom = nom;
             this.score = 0;
             this.motsTrouves = new string[0];
+
         }
 
         public bool Contain(string mot)
@@ -24,7 +29,7 @@ namespace ConsoleApp1
             bool b = false;
             for(int i = 0;i < this.motsTrouves.Length;i++)
             {
-                if(mot == motsTrouves[i])
+                if(mot == this.motsTrouves[i])
                 {
                     b = true;
                 }
@@ -43,14 +48,13 @@ namespace ConsoleApp1
                 mots[motsTrouves.Length] = mot;
                 motsTrouves = mots;
             }
-            
         }
         public string toString()
         {
-            string s = "Nom : " + nom + "\nScore : " + score + "\nMots trouvés : ";
-            for( int i = 0;i <motsTrouves.Length;i++)
+            string s = "Nom : " + this.nom + "\nScore : " + this.score + "\nMots trouvés : ";
+            for( int i = 0;i <this.motsTrouves.Length;i++)
             {
-                s += "\n" + motsTrouves[i];
+                s += "\n" + this.motsTrouves[i];
             }
             return s;
         }

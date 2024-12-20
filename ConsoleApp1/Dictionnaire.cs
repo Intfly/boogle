@@ -217,8 +217,9 @@ namespace ConsoleApp1
                 tamis(dico, 0, i);
             }
         }
-        public bool RechDichoRecursif(string mot, string[] dico)
+        public bool RechDichoRecursif(string mot, string[] dico =null)
         {
+            if (dico == null) dico = this.mots;
             int mil = dico.Length / 2;
             if (dico.Length == 0)
             {
@@ -240,6 +241,34 @@ namespace ConsoleApp1
                 Array.Copy(dico, mil + 1, dico2, 0, dico2.Length);
                 return RechDichoRecursif(mot, dico2);
             }
+        }
+
+        public bool testRecherche(int nombreTest)
+        {
+            ///return true si tous les test passent, false sinon
+            
+            Random random = new Random();
+            int indice;
+            for(int i=0; i < nombreTest; i++)
+            {
+                indice = random.Next(this.mots.Length-1);
+                if (!RechDichoRecursif(this.mots[indice])) return false;
+            }
+            return true;
+        }
+
+        public bool testTri()
+        {
+            for(int i=1; i < this.mots.Length; i++)
+            {
+                ///on vérifie si les mots sont bien ordonnés
+                for(int y=0; y < Math.Max(this.mots[i].Length, this.mots[i-1].Length); y++)
+                {
+
+                }
+            }
+
+            return true;
         }
 
     }
