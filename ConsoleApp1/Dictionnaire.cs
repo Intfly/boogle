@@ -173,6 +173,34 @@ namespace ConsoleApp1
             }
         }
 
+        public bool testRecherche(int nombreTest)
+        {
+            ///return true si tous les test passent, false sinon
+            
+            Random random = new Random();
+            int indice;
+            for(int i=0; i < nombreTest; i++)
+            {
+                indice = random.Next(this.mots.Length-1);
+                if (!RechDichoRecursif(this.mots[indice])) return false;
+            }
+            return true;
+        }
+
+        public bool testTri()
+        {
+            for(int i=1; i < this.mots.Length; i++)
+            {
+                ///on vérifie si les mots sont bien ordonnés
+                for(int y=0; y < Math.Max(this.mots[i].Length, this.mots[i-1].Length); y++)
+                {
+
+                }
+            }
+
+            return true;
+        }
+
     }
 }
 

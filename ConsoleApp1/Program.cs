@@ -8,7 +8,7 @@ class Program
     static void Main()
     {
         Jeu jeu = new Jeu();
-        jeu.lancer();
+        jeu.menuTest();
 
     }
 }

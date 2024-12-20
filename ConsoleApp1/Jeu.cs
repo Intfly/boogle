@@ -35,10 +35,47 @@ namespace ConsoleApp1
 
         public void menuTest()
         {
+            int numero = -1;
+            string param = "";
+            int nombreTest = 0;
+            bool retour = false;
+            Dictionnaire dictionnaire = new Dictionnaire(param);
+
+            string[] tests = { "appartenance du mot dans le dictionnaire (RechDichoRecursif())", "tri du dictionnaire(triDictionnaire())" };
             Console.WriteLine("Quel test unitaire voulez-vous lancer ?");
-            for(int i=0;i< 5; i++)
+
+            for(int i=0;i< tests.Length; i++)
             {
-                Console.WriteLine("test " + i+ ": appartenance du mot dans le dictionnaire (RechDichoRecursif())");
+                Console.WriteLine("test " + (i+1)+ ": " + tests[i]);
+            }
+            numero = Convert.ToInt32(Console.ReadLine());
+
+            switch (numero)
+            {
+                case 1:
+                    Console.WriteLine("Quelle langue voulez-vous tester ?");
+                    param = Console.ReadLine();
+                    Console.WriteLine("Combien de tests automatisés voulez-vous faire ?");
+                    nombreTest = Convert.ToInt32(Console.ReadLine());
+
+                    retour = dictionnaire.testRecherche(nombreTest);
+                    break;
+
+                case 2:
+
+                    Console.WriteLine("Combien de tests automatisés voulez-vous faire ?");
+                    nombreTest = Convert.ToInt32(Console.ReadLine());
+                    retour = dictionnaire.testTri(nombreTest);
+                    break;
+            }
+
+            if (retour)
+            {
+                Console.WriteLine("La fonction marche");
+            }
+            else
+            {
+                Console.WriteLine("La fonction ne marche pas");
             }
         }
 
