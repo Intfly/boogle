@@ -179,7 +179,7 @@ namespace ConsoleApp1
             {
                 sequence = Console.ReadLine();
                 if (sequence == "") break;
-                if(this.Test_Plateau(sequence, null))
+                if(this.Test_Plateau(sequence, dico))
                 {
                     Console.WriteLine("Le mot se trouve dans le plateau et est "+langue);
 
