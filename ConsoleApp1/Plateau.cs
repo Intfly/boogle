@@ -141,7 +141,7 @@ namespace ConsoleApp1
             }
 
 
-            if (indice == mot.Length && dico.RechDichoRecursif(mot))// && mot appartient au dictionnaire
+            if (indice == mot.Length && (dico == null || dico.RechDichoRecursif(mot)))// && mot appartient au dictionnaire si le dico est précisé
             {
                 return true;
             }
@@ -164,6 +164,33 @@ namespace ConsoleApp1
                 }
             }
             return mot_trouve;
+        }
+
+        public bool testTestPlateau()
+        {
+            Console.WriteLine("Quelle langue voulez-vous tester ?");
+            string langue =Console.ReadLine();
+            Dictionnaire dico = new Dictionnaire(langue);
+            
+            Console.WriteLine("Quels mots voulez-vous tester dans le plateau ? (appuyez sur entrée pour arrêter le programme)\n" + this.toString());
+            string sequence =" ";
+            
+            while (true)
+            {
+                sequence = Console.ReadLine();
+                if (sequence == "") break;
+                if(this.Test_Plateau(sequence, dico))
+                {
+                    Console.WriteLine("Le mot se trouve dans le plateau et est "+langue);
+
+                }
+                else
+                {
+                    Console.WriteLine("Le mot ne se trouve pas de le plateau ou n'est pas "+langue);
+                }
+            }
+
+            return true;
         }
     }
 
