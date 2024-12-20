@@ -33,6 +33,15 @@ namespace ConsoleApp1
 
         }
 
+        public void menuTest()
+        {
+            Console.WriteLine("Quel test unitaire voulez-vous lancer ?");
+            for(int i=0;i< 5; i++)
+            {
+                Console.WriteLine("test " + i+ ": appartenance du mot dans le dictionnaire (RechDichoRecursif())");
+            }
+        }
+
         public string definirLangueJeu()
         {
             ///permet de définir la langue du jeu
