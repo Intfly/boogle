@@ -149,9 +149,9 @@ namespace ConsoleApp1
             {
                 ///on trouve les coordonnées des lettres
                 ///on évite les erreurs de dépassement avec les Min et Max
-                for (int i = Math.Max(0,coordonnees[0]-1); i <= Math.Min(this.taille-1, coordonnees[0]+1); i++)
+                for (int i = Math.Max(0,coordonnees[0]-1); i < Math.Min(this.taille-1, coordonnees[0]+1); i++)
                 {
-                    for (int j = Math.Max(0, coordonnees[1] - 1); j <= Math.Min(this.taille-1, coordonnees[1] + 1); j++)
+                    for (int j = Math.Max(0, coordonnees[1] - 1); j < Math.Min(this.taille-1, coordonnees[1] + 1); j++)
                     {
                         if (this.des[i, j].Lettre == mot[indice])
                         {

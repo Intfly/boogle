@@ -17,8 +17,6 @@ namespace ConsoleApp1
         {
             lettres = new char[6];
             this.r = new Random();
-            
-            
             try
             {
                 StreamReader sr = new StreamReader("..\\net6.0\\Lettres.txt");
@@ -56,7 +54,6 @@ namespace ConsoleApp1
                 Console.WriteLine(ex.ToString());
             }
         }
-        
         public void Lance()
         {
             lettre = lettres[r.Next(0, 5)];

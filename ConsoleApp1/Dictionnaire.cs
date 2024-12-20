@@ -189,7 +189,6 @@ namespace ConsoleApp1
             temp = dico[storeIndex];
             dico[storeIndex] = dico[d];
             dico[d] = temp;
-
             return storeIndex;
         } 
         public static void triRapide(string[] dico, int g, int d)
