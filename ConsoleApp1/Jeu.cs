@@ -25,9 +25,20 @@ namespace ConsoleApp1
             this.dictionnaire = new Dictionnaire(this.langue);
 
             bool fini = false;
-            while(fini == false)
+
+            Console.WriteLine("combien de tours durera la partie ?");
+            int nombreTours = Convert.ToInt32(Console.ReadLine());
+            while(nombreTours !=0)
             {
                 fini = this.tourSuivant();
+                nombreTours--;
+            }
+
+            Console.WriteLine("La partie est finie !!!");
+            for(int i=0;i!=nomJoueurs.Length;i++)
+            {
+
+                Console.WriteLine("Le joueur "+this.joueurs[i].Nom + " a " + this.joueurs[i].Score + " points");
             }
 
 
@@ -152,6 +163,7 @@ namespace ConsoleApp1
         public int calculScore(string mot)
         {
             int score = 0;
+            mot = mot.ToUpper();
             try
             {
                 StreamReader sr = new StreamReader("..\\net6.0\\Lettres.txt");

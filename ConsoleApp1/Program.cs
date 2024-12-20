@@ -9,7 +9,7 @@ class Program
     {
         Jeu jeu = new Jeu();
         jeu.lancer();
-
+        //Console.WriteLine(jeu.calculScore("JAZZ"));
     }
 }
 
