@@ -15,6 +15,7 @@ namespace ConsoleApp1
         public Dictionnaire(string language)
         {
             this.language = language;
+            ///Définit quel fichier accéder en fonction de la langue
             string file = "";
             if (language == "français")
             {
@@ -24,10 +25,12 @@ namespace ConsoleApp1
             {
                 file = "..\\net6.0\\MotsPossiblesEN.txt";
             }
+            ///Initialisation du dictionnaire
             List<string> strings = new List<string>();
             string[] strings2;
             try
             {
+                ///lit le fichier selon la langue et crée une liste de tous les mots selon les " "
                 StreamReader sr = new StreamReader(file);
                 string ligne = sr.ReadToEnd();
                 string mot = "";
@@ -49,28 +52,40 @@ namespace ConsoleApp1
                 Console.WriteLine(ex);
                 Console.WriteLine("Le fichier n'est pas lisible.");
             }
+            ///Création d'un tableau copie de la liste
             strings2 = new string[strings.Count];
             for (int i = 0; i < strings.Count; i++)
             {
                 strings2[i] = strings[i];
             }
+            ///Tri du tableau (ici tri par tas)
             mots = (strings2);
             triParTas(strings2, mots.Length);
         }
         public string toString()
         {
+            ///Création de dictionnaires qui associent respectivement une longueur de mots au nombre de mots avec cette longueur
+            ///et une lettre de l'alphabet au nombre de mots commençant par cette lettre
             IDictionary<int, int> lengths = new Dictionary<int, int>();
             IDictionary<char, int> lettres = new Dictionary<char, int>();
             char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            ///Initialisation de lettres avec chaque lettre ayant 0 mots commençant par elle
             for (int i = 0; i < alphabet.Length; i++)
             {
                 lettres.Add(alphabet[i], 0);
             }
+            ///Création d'une copie de lettres
             IDictionary<char, int> lettres2 = new Dictionary<char, int>();
             foreach (char c in lettres.Keys)
             {
                 lettres2.Add(c, lettres[c]);
             }
+            ///Attribution des longueurs de mots : 
+            ///Pour chaque mot, regarder si sa longueur est déja renseignée dans lengths, si c'est le cas incrémenter le nombre de mots avec la longueur.
+            ///Si ce n'est pas le cas, ajouter cette longueur qui n'est présente que une fois vu que c'est la première fois que l'on la rencontre.
+            ///Attribution des lettres débutant un mot :
+            ///Pour chaque lettre de l'alphabet, vérifier si le mot n'est pas nul et s'il commence par cette lettre.
+            ///Puis copier les valeurs de lettres2 dans lettres.
             for (int i = 0; i < this.mots.Length; i++)
             {
                 if (lengths.ContainsKey(mots[i].Length))
@@ -93,6 +108,7 @@ namespace ConsoleApp1
                     lettres[j] = lettres2[j];
                 }
             }
+            ///Pour l'affichage, on fait 
             string tostring = "Nombre de mots par longueur :";
             foreach (int key in lengths.Keys)
             {
@@ -170,7 +186,7 @@ namespace ConsoleApp1
             dico[d] = temp;
 
             return storeIndex;
-        }
+        } 
         public static void triRapide(string[] dico, int g, int d)
         {
             if (g < d)
