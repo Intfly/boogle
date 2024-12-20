@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
@@ -162,9 +162,9 @@ namespace ConsoleApp1
                 {
                     lignesSeparees[i] = lignes[i].Split(";");
                 }
-                for(int i = 0; i < mot.Length; i++)
+                for (int i = 0; i < mot.Length; i++)
                 {
-                    for(int j = 0;j < lignes.Length; j++)
+                    for (int j = 0; j < lignes.Length; j++)
                     {
                         if (lignesSeparees[j][0][0] == mot[i])
                         {
@@ -173,7 +173,7 @@ namespace ConsoleApp1
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex.ToString());
             }
